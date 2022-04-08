@@ -4,7 +4,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>48284b5c-ce33-4457-ae07-df3bf3a2e99d</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>TestPyBullet.py</StartupFile>
+    <StartupFile>TestInverseKinematicsSolver.py</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
@@ -22,9 +22,23 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Test.py" />
+    <Compile Include="TestInverseKinematicsSolver.py" />
+    <Compile Include="inverse_kinematics_demo.py" />
+    <Compile Include="InverseKinematicsSolver.py" />
+    <Compile Include="step_by_step_inverse_kinematics.py" />
     <Compile Include="TestPyBullet.py" />
   </ItemGroup>
   <ItemGroup>
+    <Interpreter Include="env3.9\">
+      <Id>env3.9</Id>
+      <Version>3.9</Version>
+      <Description>env3.9 (Python 3.9 (64-bit))</Description>
+      <InterpreterPath>Scripts\python.exe</InterpreterPath>
+      <WindowsInterpreterPath>Scripts\pythonw.exe</WindowsInterpreterPath>
+      <PathEnvironmentVariable>PYTHONPATH</PathEnvironmentVariable>
+      <Architecture>X64</Architecture>
+    </Interpreter>
     <Interpreter Include="env\">
       <Id>env</Id>
       <Version>0.0</Version>
@@ -39,7 +53,86 @@
     <InterpreterReference Include="Global|PythonCore|3.10" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="iiwa14.sdf" />
+    <Folder Include="kuka_iiwa\" />
+    <Folder Include="kuka_iiwa\meshes\" />
+    <Folder Include="m1n6s300\" />
+    <Folder Include="m1n6s300\meshes\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="kuka_iiwa\kuka_with_gripper.sdf" />
+    <Content Include="kuka_iiwa\kuka_with_gripper2.sdf" />
+    <Content Include="kuka_iiwa\kuka_world.sdf" />
+    <Content Include="kuka_iiwa\meshes\finger_base_left.stl" />
+    <Content Include="kuka_iiwa\meshes\finger_base_right.stl" />
+    <Content Include="kuka_iiwa\meshes\finger_tip_left.stl" />
+    <Content Include="kuka_iiwa\meshes\finger_tip_right.stl" />
+    <Content Include="kuka_iiwa\meshes\link_0.mtl" />
+    <Content Include="kuka_iiwa\meshes\link_0.obj" />
+    <Content Include="kuka_iiwa\meshes\link_0.stl" />
+    <Content Include="kuka_iiwa\meshes\link_1.mtl" />
+    <Content Include="kuka_iiwa\meshes\link_1.obj" />
+    <Content Include="kuka_iiwa\meshes\link_1.stl" />
+    <Content Include="kuka_iiwa\meshes\link_2.mtl" />
+    <Content Include="kuka_iiwa\meshes\link_2.obj" />
+    <Content Include="kuka_iiwa\meshes\link_2.stl" />
+    <Content Include="kuka_iiwa\meshes\link_3.mtl" />
+    <Content Include="kuka_iiwa\meshes\link_3.obj" />
+    <Content Include="kuka_iiwa\meshes\link_3.stl" />
+    <Content Include="kuka_iiwa\meshes\link_4.mtl" />
+    <Content Include="kuka_iiwa\meshes\link_4.obj" />
+    <Content Include="kuka_iiwa\meshes\link_4.stl" />
+    <Content Include="kuka_iiwa\meshes\link_5.mtl" />
+    <Content Include="kuka_iiwa\meshes\link_5.obj" />
+    <Content Include="kuka_iiwa\meshes\link_5.stl" />
+    <Content Include="kuka_iiwa\meshes\link_6.mtl" />
+    <Content Include="kuka_iiwa\meshes\link_6.obj" />
+    <Content Include="kuka_iiwa\meshes\link_6.stl" />
+    <Content Include="kuka_iiwa\meshes\link_7.mtl" />
+    <Content Include="kuka_iiwa\meshes\link_7.obj" />
+    <Content Include="kuka_iiwa\meshes\link_7.stl" />
+    <Content Include="kuka_iiwa\model.sdf" />
+    <Content Include="kuka_iiwa\model.urdf" />
+    <Content Include="kuka_iiwa\model2.sdf" />
+    <Content Include="kuka_iiwa\model_for_sdf.urdf" />
+    <Content Include="kuka_iiwa\model_free_base.urdf" />
+    <Content Include="kuka_iiwa\model_vr_limits.urdf" />
+    <Content Include="m1n6s300\m1n6s300.urdf" />
+    <Content Include="m1n6s300\meshes\arm.dae" />
+    <Content Include="m1n6s300\meshes\arm.SLDPRT" />
+    <Content Include="m1n6s300\meshes\arm.STL" />
+    <Content Include="m1n6s300\meshes\arm_half_1.dae" />
+    <Content Include="m1n6s300\meshes\arm_half_1.STL" />
+    <Content Include="m1n6s300\meshes\arm_half_2.dae" />
+    <Content Include="m1n6s300\meshes\arm_half_2.STL" />
+    <Content Include="m1n6s300\meshes\arm_mico.dae" />
+    <Content Include="m1n6s300\meshes\arm_mico.STL" />
+    <Content Include="m1n6s300\meshes\base.dae" />
+    <Content Include="m1n6s300\meshes\base.STL" />
+    <Content Include="m1n6s300\meshes\finger_distal.dae" />
+    <Content Include="m1n6s300\meshes\finger_distal.STL" />
+    <Content Include="m1n6s300\meshes\finger_proximal.dae" />
+    <Content Include="m1n6s300\meshes\finger_proximal.STL" />
+    <Content Include="m1n6s300\meshes\force_torque_mount.stl" />
+    <Content Include="m1n6s300\meshes\forearm.dae" />
+    <Content Include="m1n6s300\meshes\forearm.STL" />
+    <Content Include="m1n6s300\meshes\forearm_mico.dae" />
+    <Content Include="m1n6s300\meshes\forearm_mico.STL" />
+    <Content Include="m1n6s300\meshes\gripper_mount.stl" />
+    <Content Include="m1n6s300\meshes\hand_2finger.dae" />
+    <Content Include="m1n6s300\meshes\hand_2finger.STL" />
+    <Content Include="m1n6s300\meshes\hand_3finger.dae" />
+    <Content Include="m1n6s300\meshes\hand_3finger.STL" />
+    <Content Include="m1n6s300\meshes\ring_big.STL" />
+    <Content Include="m1n6s300\meshes\ring_small.STL" />
+    <Content Include="m1n6s300\meshes\robotiq_ft_sensor.stl" />
+    <Content Include="m1n6s300\meshes\shoulder.dae" />
+    <Content Include="m1n6s300\meshes\shoulder.STL" />
+    <Content Include="m1n6s300\meshes\wrist.dae" />
+    <Content Include="m1n6s300\meshes\wrist.STL" />
+    <Content Include="m1n6s300\meshes\wrist_spherical_1.dae" />
+    <Content Include="m1n6s300\meshes\wrist_spherical_1.STL" />
+    <Content Include="m1n6s300\meshes\wrist_spherical_2.dae" />
+    <Content Include="m1n6s300\meshes\wrist_spherical_2.STL" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />
   <!-- Uncomment the CoreCompile target to enable the Build command in
