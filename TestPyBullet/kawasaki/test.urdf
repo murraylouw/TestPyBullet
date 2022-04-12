@@ -1,0 +1,145 @@
+
+<?xml version="1.0" ?>
+
+<robot name="kawasaki">
+    
+    <!-- Import Rviz colors -->
+    <material name="Grey">
+        <color rgba="0.2 0.2 0.2 1.0"/>
+    </material>
+    <material name="Orange">
+        <color rgba="1.0 0.423529411765 0.0392156862745 1.0"/>
+    </material>
+    <material name="Blue">
+        <color rgba="0.5 0.7 1.0 1.0"/>      
+    </material>
+    
+    
+    <link name="base">
+        <origin rpy="0 0 0" xyz="0 0 0" />
+        <visual>
+            <origin rpy="0 0 0" xyz="0 0 0" />
+            <geometry>
+                <mesh filename="meshes/base.dae"/>
+            </geometry>
+        </visual>
+        <collision>
+            <origin rpy="0 0 0" xyz="0 0 0" />
+            <geometry>
+                <mesh filename="meshes/base.dae"/>
+            </geometry>
+        </collision>
+    </link>  
+    
+    <link name="link_1">
+        <origin rpy="0 0 0" xyz="0 0 0" />
+        <visual>
+            <origin rpy="0 0 0" xyz="0 0 0" />
+            <geometry>
+                <mesh filename="meshes/link_1.dae"/>
+            </geometry>
+        </visual>
+        <collision>
+            <origin rpy="0 0 0" xyz="0 0 0" />
+            <geometry>
+                <mesh filename="meshes/link_1.dae"/>
+            </geometry>
+        </collision>
+    </link>  
+    
+    <link name="link_2">
+        <origin rpy="0 0 0" xyz="0 0.2 0.53" />
+        <visual>
+            <origin rpy="0 0 0" xyz="0 0.2 0.53" />
+            <geometry>
+                <mesh filename="meshes/link_2.dae"/>
+            </geometry>
+        </visual>
+        <collision>
+            <origin rpy="0 0 0" xyz="0 0.2 0.53" />
+            <geometry>
+                <mesh filename="meshes/link_2.dae"/>
+            </geometry>
+        </collision>
+    </link>  
+    
+    <link name="link_3">
+        <origin rpy="0 0 0" xyz="0 0.2 1.69" />
+        <visual>
+            <origin rpy="0 0 0" xyz="0 0.2 1.69" />
+            <geometry>
+                <mesh filename="meshes/link_3.dae"/>
+            </geometry>
+        </visual>
+        <collision>
+            <origin rpy="0 0 0" xyz="0 0.2 1.69" />
+            <geometry>
+                <mesh filename="meshes/link_3.dae"/>
+            </geometry>
+        </collision>
+    </link>  
+    
+    <link name="link_4">
+        <origin rpy="0 0 0" xyz="0 0.2 1.92" />
+        <visual>
+            <origin rpy="0 0 0" xyz="0 0.2 1.92" />
+            <geometry>
+                <mesh filename="meshes/link_4.dae"/>
+            </geometry>
+        </visual>
+        <collision>
+            <origin rpy="0 0 0" xyz="0 0.2 1.92" />
+            <geometry>
+                <mesh filename="meshes/link_4.dae"/>
+            </geometry>
+        </collision>
+    </link>  
+    
+    <link name="link_5">
+        <origin rpy="0 0 0" xyz="0 1.45 1.92" />
+        <visual>
+            <origin rpy="0 0 0" xyz="0 1.45 1.92" />
+            <geometry>
+                <mesh filename="meshes/link_5.dae"/>
+            </geometry>
+        </visual>
+        <collision>
+            <origin rpy="0 0 0" xyz="0 1.45 1.92" />
+            <geometry>
+                <mesh filename="meshes/link_5.dae"/>
+            </geometry>
+        </collision>
+    </link>  
+    
+    <link name="link_6">
+        <origin rpy="0 0 0" xyz="0 1.675 1.92" />
+        <visual>
+            <origin rpy="0 0 0" xyz="0 1.675 1.92" />
+            <geometry>
+                <mesh filename="meshes/link_6.dae"/>
+            </geometry>
+        </visual>
+        <collision>
+            <origin rpy="0 0 0" xyz="0 1.675 1.92" />
+            <geometry>
+                <mesh filename="meshes/link_6.dae"/>
+            </geometry>
+        </collision>
+    </link>     
+    
+    
+<joint name="joint_1" type="revolute">
+        <parent link="base"/>
+        <child link="link_1"/>
+        <origin rpy="0 0 0" xyz="0 0 0"/>
+        <axis xyz="0 0 1"/>
+        <limit effort="300" lower="-2.96705972839" upper="", velocity = "10"/>
+        <dynamics damping="0.5"/>
+    </joint> 
+	 
+	 
+	 
+	 
+	 
+	
+</robot>

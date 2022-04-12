@@ -1,5 +1,4 @@
 
-
 import pybullet as p
 import time
 import math
@@ -9,9 +8,9 @@ import pybullet_data
 p.connect(p.GUI)
 
 p.setAdditionalSearchPath(pybullet_data.getDataPath()) # Add path to default objects from pybullet
-p.loadURDF("plane.urdf", [0, 0, -0.3])
+p.loadURDF("plane.urdf", [0, 0, 0])
 
-robotId = p.loadURDF("kawasaki/model.urdf", [0, 0, 0])
+robotId = p.loadURDF("kawasaki/test.urdf", [0, 0, 0])
 print("wait")
 p.resetBasePositionAndOrientation(robotId, [0, 0, 0], [0, 0, 0, 1])
 endEffectorIndex = 5

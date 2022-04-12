@@ -1,0 +1,61 @@
+<?xml version="1.0" ?>
+
+<robot name="kawasaki" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+    <xacro:property name="link_1_xyz" value="0 0 0" />
+    
+<!-- Import Rviz colors -->
+    <material name="Grey">
+        <color rgba="0.2 0.2 0.2 1.0"/>
+    </material>
+    <material name="Orange">
+        <color rgba="1.0 0.423529411765 0.0392156862745 1.0"/>
+    </material>
+    <material name="Blue">
+        <color rgba="0.5 0.7 1.0 1.0"/>      
+    </material>
+
+    <link name="base">
+        <origin rpy="0 0 0" xyz=${link_1_xyz}/>
+        <visual>
+            <geometry>
+                <mesh filename="meshes/base.dae"/>
+            </geometry>
+            <material name="Grey"/>
+        </visual>
+        <collision>
+            <geometry>
+                <mesh filename="meshes/base.dae"/>
+            </geometry>
+        </collision>
+    </link>
+    
+    <!-- joint between base and link_1 -->
+    <joint name="joint_1" type="revolute">
+        <parent link="base"/>
+        <child link="link_1"/>
+        <origin rpy="0 0 0" xyz="0 0 0.1575"/>
+        <axis xyz="0 0 1"/>
+        <limit effort="300" lower="-2.96705972839" upper="2.96705972839" velocity="10"/>
+        <dynamics damping="0.5"/>
+    </joint>
+    
+    <link name="link_1">
+        <visual>
+        <origin rpy="0 0 0" xyz="0 0 0"/>
+        <geometry>
+        <mesh filename="meshes/link_1.dae"/>
+        </geometry>
+        <material name="Blue"/>
+        </visual>
+        <collision>
+        <origin rpy="0 0 0" xyz="0 0 0"/>
+        <geometry>
+        <mesh filename="meshes/link_1.dae"/>
+        </geometry>
+        </collision>
+    </link>-->
+    
+	
+</robot>
+
