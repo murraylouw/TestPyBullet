@@ -4,34 +4,49 @@ import time
 import math
 from datetime import datetime
 import pybullet_data
+import subprocess
+import sys
 
 p.connect(p.GUI)
 
 p.setAdditionalSearchPath(pybullet_data.getDataPath()) # Add path to default objects from pybullet
 p.loadURDF("plane.urdf", [0, 0, 0])
 
-robotId = p.loadURDF("kawasaki/test.urdf", [0, 0, 0])
-print("wait")
+exec(open("kawasaki_BX200L/kawasaki_BX200L_urdf.py").read()) # Generate URDF file with python script
+robotId = p.loadURDF("kawasaki_BX200L/kawasaki_BX200L.urdf", [0, 0, 0])
+
 p.resetBasePositionAndOrientation(robotId, [0, 0, 0], [0, 0, 0, 1])
+# p.changeDynamics(robotId, 0, frictionAnchor=100000000) # Add friction anchor to base
 endEffectorIndex = 5
 numJoints = p.getNumJoints(robotId)
 
 lowerLimits = [-.967, -2, -2.96, 0.19, -2.96, -2.09] #lower limits for null space
 upperLimits = [.967, 2, 2.96, 2.29, 2.96, 2.09] #upper limits for null space
 jointRanges = [5.8, 4, 5.8, 4, 5.8, 4] #joint ranges for null space
-restPoses = [0, 0, 0, 0.5 * math.pi, 0, -math.pi * 0.5 * 0.66] #restposes for null space
+restPoses = [0, 0, 0, 0, 0, 0] #restposes for null space
 jointDampingCoefficients = [0.1, 0.1, 0.1, 0.1, 0.1, 0.1]
 
-for i in range(numJoints):
-  p.resetJointState(robotId, i, restPoses[i])
+# for i in range(numJoints):
+#   p.resetJointState(robotId, i, restPoses[i])
 
-p.setGravity(0, 0, 0)
+p.setGravity(0, 0, -10)
 prevPose = [0, 0, 0]
 prevPose1 = [0, 0, 0]
 hasPrevPose = 0
 useNullSpace = 1
 ikSolver = 0
 trailDuration = 15 #trailDuration is duration (in seconds) after debug lines will be removed automatically #use 0 for no-removal
+
+# Ask for and set individual joint values:
+# while 1:  
+#   print("joint_number  jolint_value[deg]:")
+#   inputs = input().split()
+#   joint_index = int(inputs[0])-1
+#   joint_value = math.radians(float(inputs[1]))
+#   p.resetJointState(robotId, joint_index, joint_value)
+#   p.stepSimulation()
+#   # time.sleep(0.1)
+
 
 while 1:  
 
