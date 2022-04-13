@@ -1,8 +1,13 @@
+# Convert to a single exe by running the following in cmd in the current directory:
+# pip install pyinstaller
+# pyinstaller .\InverseKinematicsViaPipe.py --onefile
+
 from typing import ByteString
 import InverseKinematicsSolver
 import sys
 import time
 import win32file 
+import struct
 
 def main():
 
@@ -27,29 +32,61 @@ def main():
         
     ikSolver = InverseKinematicsSolver.InverseKinematicsSolver()
 
-    receiveHandle = win32file.CreateFile(
-        "\\\\.\\pipe\\ik_pipe", 
-        win32file.GENERIC_READ | win32file.GENERIC_WRITE, 
-        0, 
-        None, 
-        win32file.OPEN_EXISTING, 
-        0, 
-        None)
+
+    pipeFile = open(r'\\.\pipe\ik_pipe', 'r+b', 0)
+
+    while True:
+    
+        # Read input data from pipe
+        received_str_length = struct.unpack('I', pipeFile.read(4))[0] # Read str length
+        received_string = pipeFile.read(received_str_length).decode('ascii') # Read str
+        pipeFile.seek(0)
+
+        print('Received from .NET: ', received_string)
+
+        if received_string.find("stop_listening") != -1: # Exit while loop when key word is read
+            break
+
+        identifier_start   = "<tcp_pose>"
+        identifier_end     = "</tcp_pose>"
+        start_index     = received_string.find(identifier_start) + len(identifier_start)
+        end_index       = received_string.find(identifier_end)
+        
+        tcp_pose = received_string[start_index:end_index].split() # Format data into useable form
+        x = float(tcp_pose[0])
+        y = float(tcp_pose[1])
+        z = float(tcp_pose[2])
+        eulerX = float(tcp_pose[3])
+        eulerY = float(tcp_pose[4])
+        eulerZ = float(tcp_pose[5])
+
+        # Perform calculation on input data
+        jointValues = ikSolver.CalculateJointValues(x, y, z, eulerX, eulerY, eulerZ, robotFilePath)
+    
+        # Send output through pipe:
+        message_from_python = '<joint_values>{0}<joint_values/>'.format(jointValues).encode('ascii')
+        
+        pipeFile.write(struct.pack('I', len(message_from_python)) + message_from_python) # Write str length and str
+        pipeFile.seek(0)
+
+        print('Sent from Python: ', message_from_python)
+        print()
+
 
     while True:
         left, read_data = win32file.ReadFile(receiveHandle, 4096) # Does not proceed until new data is read
         
-        data_str = str(read_data)
+        received_string = str(read_data)
 
-        if data_str.find("stop_listening") != -1: # Exit while loop when key word is read
+        if received_string.find("stop_listening") != -1: # Exit while loop when key word is read
             break
         
         identifier_start   = "<tcp_pose>"
         identifier_end     = "</tcp_pose>"
-        start_index     = data_str.find(identifier_start) + len(identifier_start)
-        end_index       = data_str.find(identifier_end)
+        start_index     = received_string.find(identifier_start) + len(identifier_start)
+        end_index       = received_string.find(identifier_end)
         
-        tcp_pose = data_str[start_index:end_index].split()
+        tcp_pose = received_string[start_index:end_index].split()
         print("Data received:")
         print(tcp_pose)
 
