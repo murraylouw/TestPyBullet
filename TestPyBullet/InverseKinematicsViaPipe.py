@@ -1,3 +1,4 @@
+from typing import ByteString
 import InverseKinematicsSolver
 import sys
 import time
@@ -5,7 +6,7 @@ import win32file
 
 def main():
 
-    if len(sys.argv) == 8:
+    if len(sys.argv) == 8: # Receive input args
         x = float(sys.argv[1])
         y = float(sys.argv[2])
         z = float(sys.argv[3])
@@ -14,7 +15,7 @@ def main():
         eulerZ = float(sys.argv[6])
         robotFilePath = str(sys.argv[7])
 
-    else: # If no input args are received
+    else: # If no input args are received, set default values
         x = 1
         y = 1
         z = 1
@@ -27,7 +28,7 @@ def main():
     ikSolver = InverseKinematicsSolver.InverseKinematicsSolver()
 
     receiveHandle = win32file.CreateFile(
-        "\\\\.\\pipe\\TCP_pose", 
+        "\\\\.\\pipe\\ik_pipe", 
         win32file.GENERIC_READ | win32file.GENERIC_WRITE, 
         0, 
         None, 
@@ -43,8 +44,8 @@ def main():
         if data_str.find("stop_listening") != -1: # Exit while loop when key word is read
             break
         
-        identifier_start   = "<TCP_pose>"
-        identifier_end     = "</TCP_pose>"
+        identifier_start   = "<tcp_pose>"
+        identifier_end     = "</tcp_pose>"
         start_index     = data_str.find(identifier_start) + len(identifier_start)
         end_index       = data_str.find(identifier_end)
         
@@ -59,9 +60,11 @@ def main():
         eulerY = float(tcp_pose[4])
         eulerZ = float(tcp_pose[5])
 
-        result = ikSolver.CalculateJointValues(x, y, z, eulerX, eulerY, eulerZ, robotFilePath)
+        result = bytes(ikSolver.CalculateJointValues(x, y, z, eulerX, eulerY, eulerZ, robotFilePath))
         print("joint values:")
         print(result)
+
+        win32file.WriteFile(receiveHandle, result, 4096)
 
     
 

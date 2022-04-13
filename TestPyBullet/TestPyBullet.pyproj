@@ -23,7 +23,6 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="kawaksaki_IK.py" />
-    <Compile Include="kawasaki\kawasaki.urdf.py" />
     <Compile Include="kawasaki_BX200L\kawasaki_BX200L_urdf.py" />
     <Compile Include="InverseKinematicsViaPipe.py" />
     <Compile Include="TestInverseKinematicsSolver.py" />
@@ -37,8 +36,6 @@
     <InterpreterReference Include="Global|PythonCore|3.9" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="kawasaki\" />
-    <Folder Include="kawasaki\meshes\" />
     <Folder Include="kawasaki_BX200L\" />
     <Folder Include="kawasaki_BX200L\meshes\" />
     <Folder Include="kuka_iiwa\" />
@@ -47,19 +44,6 @@
     <Folder Include="m1n6s300\meshes\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="kawasaki\kawasaki.urdf" />
-    <Content Include="kawasaki\kawasaki_urdf.jinja" />
-    <Content Include="kawasaki\meshes\base.dae" />
-    <Content Include="kawasaki\meshes\DressPack.dae" />
-    <Content Include="kawasaki\meshes\link_1.dae" />
-    <Content Include="kawasaki\meshes\link_2.dae" />
-    <Content Include="kawasaki\meshes\link_3.dae" />
-    <Content Include="kawasaki\meshes\link_4.dae" />
-    <Content Include="kawasaki\meshes\link_5.dae" />
-    <Content Include="kawasaki\meshes\link_6.dae" />
-    <Content Include="kawasaki\model.urdf" />
-    <Content Include="kawasaki\test.txt" />
-    <Content Include="kawasaki\test.txt.bak" />
     <Content Include="kawasaki_BX200L\kawasaki_BX200L.urdf" />
     <Content Include="kawasaki_BX200L\kawasaki_urdf.jinja" />
     <Content Include="kawasaki_BX200L\meshes\base.dae" />
