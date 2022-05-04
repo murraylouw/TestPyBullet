@@ -55,7 +55,13 @@ class InverseKinematicsSolver:
                                                     solver=ikSolver,
                                                     maxNumIterations=100,
                                                     residualThreshold=.01)
-    
+        # Create comma seperate string
+        jointPosesString = ""
+        for i in range(numJoints):
+            jointPosesString = jointPosesString + str(jointPoses[i]) + ","
+        jointPosesString = jointPosesString[:-1] # Remove last comma
+
+        # Set robot to current joint values
         for i in range(numJoints): # reset each joint state
             p.resetJointState(robotId, i, jointPoses[i])
 
@@ -69,7 +75,5 @@ class InverseKinematicsSolver:
 
         p.disconnect()
 
-        return str(jointPoses)
-        #return jointPoses
-
-
+        #return jointPosesString
+        return jointPoses

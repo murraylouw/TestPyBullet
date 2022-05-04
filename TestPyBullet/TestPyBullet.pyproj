@@ -4,7 +4,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>48284b5c-ce33-4457-ae07-df3bf3a2e99d</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>InverseKinematicsViaPipe.py</StartupFile>
+    <StartupFile>CalculateJointValuesFromFile.py</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
@@ -25,6 +25,12 @@
     <Compile Include="kawaksaki_IK.py" />
     <Compile Include="kawasaki_BX200L\kawasaki_BX200L_urdf.py" />
     <Compile Include="InverseKinematicsViaPipe.py" />
+    <Compile Include="CalculateJointValuesFromFile.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="TestPythonCode.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="TestInverseKinematicsSolver.py" />
     <Compile Include="inverse_kinematics_demo.py" />
     <Compile Include="InverseKinematicsSolver.py" />
